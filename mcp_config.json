@@ -9,6 +9,26 @@
             "command": "python",
             "args": ["./mcp_server/mcp_server_file_manager.py"],
             "transport": "stdio"
+        },
+        "service_stop": {
+            "command": "python",
+            "args": ["./mcp_server/mcp_server_stop_service.py"],
+            "transport": "stdio"
+        },
+        "bdp_service_stop": {
+            "command": "python",
+            "args": ["./mcp_server/mcp_bdp_stop_service.py"],
+            "transport": "stdio"
+        },
+       "resourcemanager": {
+            "command": "python",
+            "args": ["./mcp_server/mcp_server_resourcemanager.py"],
+            "transport": "stdio"
+        },
+            "service_status": {
+            "command": "python",
+            "args": ["./mcp_server/mcp_server_status_service.py"],
+            "transport": "stdio"
         }
     }
 }

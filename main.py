@@ -35,7 +35,7 @@ MCP_CHAT_PROMPT = """
     Observation: the result of the action
     ... (this Thought/Action/Action Input/Observation can repeat N times)
     Thought: I now know the final answer
-    Final Answer: the final answer to the original input question
+    Final Answer: the final answer to the original input question 
 
     When using tools, think step by step:
     1. Understand the question and what information is needed.
@@ -57,8 +57,9 @@ DEFAULT_TEMPERATURE = 0.1
 # astream_log is used to display the data generated during the processing process.
 USE_ASTREAM_LOG = True
 # LLM model settings that support Tool calling
-QWEN3_14B = "qwen3:14b"  # default model
-QWEN3 = QWEN3_14B
+#QWEN3_14B = "MFDoom/deepseek-r1-tool-calling:7b"  # default model
+QWEN3_06B = "qwen3:0.6b"  # default model
+QWEN3 = QWEN3_06B
 
 
 # Signal handler for Ctrl+C on Windows
@@ -86,7 +87,8 @@ def create_chat_model(
         # The MCP_CHAT_PROMPT includes placeholders {tools} and {tool_names}
         # which create_react_agent should fill.
         agent_executor = create_react_agent(
-            model=chat_model, tools=mcp_tools, checkpointer=MemorySaver()
+            # model=chat_model, tools=mcp_tools, checkpointer=MemorySaver()
+            model=chat_model, tools=mcp_tools, checkpointer=None
         )
         print("ReAct agent created.")
         return agent_executor  # Return the agent executor graph
@@ -247,8 +249,10 @@ async def process_query(
 
 
 async def amain(args):
-    """Async main function"""
+    global QUERY_THREAD_ID
 
+    """Async main function"""
+    print(f"args={args}")
     mcp_client = None
     try:
         # Initialize MCP client
@@ -279,6 +283,7 @@ async def amain(args):
 
         while True:
             try:
+                QUERY_THREAD_ID = str(uuid.uuid4())
                 # Get user input
                 user_input = input("\nUser: ")
 
@@ -298,6 +303,7 @@ async def amain(args):
                     processed_input,
                     timeout=int(args.timeout),
                 )
+
 
                 # The streaming callback now handles printing the AI response chunks
                 print()  # Add a newline after the streaming output is complete

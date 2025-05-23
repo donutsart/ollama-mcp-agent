@@ -1,0 +1,28 @@
+{
+    "mcpServers": {
+        "weather": {
+            "command": "python",
+            "args": ["./mcp_server/mcp_server_weather.py"],
+            "transport": "stdio"
+        },
+        "local_file_manager": {
+            "command": "python",
+            "args": ["./mcp_server/mcp_server_file_manager.py"],
+            "transport": "stdio"
+        },
+    "duckduckgo-mcp-server": {
+      "command": "npx",
+      "args": [
+        "npx",
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@nickclyde/duckduckgo-mcp-server",
+        "--key",
+        "b7a31304-374c-49c6-804f-4d6e936b1f45"
+      ]
+    }
+
+
+    }
+}

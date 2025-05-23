@@ -87,6 +87,29 @@ async def write_text_to_file(file_name: str, text: str) -> str:
         return f"Error: {str(e)}"
 
 
+# read specified text from a file
+@mcp.tool()
+async def read_text_from_file(file_name: str) -> str:
+    """
+    read file contents or open file from a specified file.
+
+    Args:
+        file_name (str): The name of the file to read to
+
+    Returns:
+        str: A string containing file contents text
+    """
+    try:
+        path = os.path.join(os.path.expanduser("~"), "Downloads", file_name)
+
+        with open(path, "r", encoding="utf-8") as f:
+            text = f.read()
+        print(f"content={text}")
+        result_text = f"{path}\n{text}"
+        return result_text
+    except Exception as e:
+        return f"Error: {str(e)}"
+
 if __name__ == "__main__":
     # Start the MCP server with stdio transport
     mcp.run(transport="stdio")

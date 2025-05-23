@@ -5,7 +5,7 @@ mcp = FastMCP(
     "Weather",  # Name of the MCP server
     instructions="You are a weather assistant that can answer questions about the weather in a given location.",  # Instructions for the LLM on how to use this tool
     host="0.0.0.0",  # Host address (0.0.0.0 allows connections from any IP)
-    port=8005,  # Port number for the server
+    port=8010,  # Port number for the server
 )
 
 
@@ -23,7 +23,7 @@ async def get_weather(location: str) -> str:
     # Return a mock weather response
     # In a real implementation, this would call a weather API
     print(f"\n[DEBUG] MCP: get_weather called: {location}\n")
-    return f"오전은 비, 오후는 맑음. 최고기온 19도, 최저기온 8도. 동남풍 2~3m/s 예상. 강우량 2mm 이하. {location} 날씨 예보입니다."
+    return f"{location} 기상 예보 입니다. 오전은 비, 오후는 맑음. 최고기온 19도, 최저기온 8도. 동남풍 2~3m/s 예상. 강우량 2mm 이하."
 
 
 if __name__ == "__main__":
